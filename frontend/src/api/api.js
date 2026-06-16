@@ -1,8 +1,13 @@
 import axios from 'axios';
 
 const getBaseURL = () => {
-    if (import.meta.env.VITE_API_URL) {
-        return import.meta.env.VITE_API_URL;
+    let url = import.meta.env.VITE_API_URL;
+    if (url) {
+        // Automatically append /api if the user omitted it
+        if (!url.endsWith('/api') && !url.endsWith('/api/')) {
+            url = url.endsWith('/') ? `${url}api` : `${url}/api`;
+        }
+        return url;
     }
     if (typeof window !== 'undefined') {
         const hostname = window.location.hostname;
