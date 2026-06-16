@@ -34,11 +34,11 @@ const Navbar = () => {
                                 display: 'flex', alignItems: 'center', justifyContent: 'center', 
                                 fontWeight: 'bold', fontSize: '1rem' 
                             }}>
-                                {user.name.charAt(0).toUpperCase()}
+                                {user?.name?.charAt(0).toUpperCase() || 'U'}
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
-                                <span style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-main)' }}>{user.name}</span>
-                                <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 500 }}>{user.role}</span>
+                                <span style={{ fontWeight: 600, fontSize: '0.875rem', color: 'var(--text-main)' }}>{user?.name}</span>
+                                <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: 500 }}>{user?.role}</span>
                             </div>
                         </div>
                         <button className="btn btn-secondary" onClick={handleLogout} style={{ padding: '0.5rem 1rem' }}>
