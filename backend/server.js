@@ -21,6 +21,10 @@ import ticketRoutes from './routes/ticketRoutes.js';
 app.use('/api/auth', authRoutes);
 app.use('/api/tickets', ticketRoutes);
 
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'API is running...' });
+});
+
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
