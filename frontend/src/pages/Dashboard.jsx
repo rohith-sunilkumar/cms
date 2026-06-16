@@ -25,9 +25,10 @@ const Dashboard = () => {
     const fetchTickets = async () => {
         try {
             const { data } = await api.get('/tickets');
-            setTickets(data);
+            setTickets(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Failed to fetch tickets', error);
+            setTickets([]);
         } finally {
             setLoading(false);
         }
