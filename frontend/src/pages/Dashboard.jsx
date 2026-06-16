@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Plus, Clock, AlertTriangle, CheckCircle, Ticket } from 'lucide-react';
 import api from '../api/api';
 
 const Dashboard = () => {
@@ -78,7 +78,7 @@ const Dashboard = () => {
             {user?.role === 'superadmin' && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                     <div className="glass-panel" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                        <TicketIcon size={32} className="text-primary" style={{ margin: '0 auto 1rem' }} />
+                        <Ticket size={32} className="text-primary" style={{ margin: '0 auto 1rem' }} />
                         <h3>{totalTickets}</h3>
                         <p className="text-muted">Total Tickets</p>
                     </div>
