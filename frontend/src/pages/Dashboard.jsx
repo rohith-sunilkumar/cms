@@ -69,11 +69,18 @@ const Dashboard = () => {
         <div className="container animate-fade-in">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h2>Dashboard</h2>
-                {user?.role === 'user' && (
-                    <button className="btn btn-primary" onClick={() => setShowCreate(!showCreate)}>
-                        <Plus size={18} /> New Ticket
-                    </button>
-                )}
+                <div>
+                    {user?.role === 'user' && (
+                        <button className="btn btn-primary" onClick={() => setShowCreate(!showCreate)}>
+                            <Plus size={18} /> New Ticket
+                        </button>
+                    )}
+                    {(user?.role === 'superadmin' || user?.role === 'admin') && (
+                        <Link to="/create-user" className="btn btn-primary">
+                            <Plus size={18} /> Create User
+                        </Link>
+                    )}
+                </div>
             </div>
 
             {user?.role === 'superadmin' && (

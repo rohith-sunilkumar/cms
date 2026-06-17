@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import TicketDetail from './pages/TicketDetail';
+import CreateUser from './pages/CreateUser';
 import api from './api/api';
 
 function ServerConnectionCheck({ children }) {
@@ -65,6 +66,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/ticket/:id" element={<TicketDetail />} />
+            <Route path="/create-user" element={<CreateUser />} />
           </Routes>
         </ServerConnectionCheck>
       </div>

@@ -17,9 +17,7 @@ const calculateSLA = (priority) => {
     }
 };
 
-// @desc    Create new ticket
-// @route   POST /api/tickets
-// @access  Private
+
 export const createTicket = async (req, res) => {
     const { title, description, priority } = req.body;
 
@@ -39,9 +37,7 @@ export const createTicket = async (req, res) => {
     }
 };
 
-// @desc    Get all tickets (role based)
-// @route   GET /api/tickets
-// @access  Private
+
 export const getTickets = async (req, res) => {
     try {
         let tickets;
@@ -58,9 +54,7 @@ export const getTickets = async (req, res) => {
     }
 };
 
-// @desc    Get ticket by ID
-// @route   GET /api/tickets/:id
-// @access  Private
+
 export const getTicketById = async (req, res) => {
     try {
         const ticket = await Ticket.findById(req.params.id)
@@ -82,9 +76,7 @@ export const getTicketById = async (req, res) => {
     }
 };
 
-// @desc    Update ticket status/priority
-// @route   PUT /api/tickets/:id
-// @access  Private/Admin
+
 export const updateTicket = async (req, res) => {
     const { status, priority, assignedTo } = req.body;
 
@@ -109,9 +101,7 @@ export const updateTicket = async (req, res) => {
     }
 };
 
-// @desc    Add response to ticket
-// @route   POST /api/tickets/:id/responses
-// @access  Private
+
 export const addTicketResponse = async (req, res) => {
     const { message } = req.body;
 
