@@ -103,3 +103,66 @@ export const createUserPrivileged = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find({}).select('-password');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getUserById = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id).select('-password');
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const updateUser = async (req, res) => {
+    const { name, email, password, role } = req.body;
+
+    try {
+        const user = await User.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Admins can only assign 'user' role
+        if (req.user.role === 'admin' && role && role !== 'user') {
+             return res.status(403).json({ message: 'Admins can only assign user roles' });
+        }
+        
+        // Prevent editing superadmin if you are not superadmin, etc.
+        if (req.user.role !== 'superadmin' && user.role === 'superadmin') {
+             return res.status(403).json({ message: 'Cannot edit superadmin' });
+        }
+
+        if (name) user.name = name;
+        if (email) user.email = email;
+        if (role) user.role = role;
+
+        if (password) {
+            user.password = password;
+        }
+
+        const updatedUser = await user.save();
+
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            role: updatedUser.role,
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import TicketDetail from './pages/TicketDetail';
 import CreateUser from './pages/CreateUser';
+import UsersList from './pages/UsersList';
+import EditUser from './pages/EditUser';
 import api from './api/api';
 
 function ServerConnectionCheck({ children }) {
@@ -67,6 +69,8 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/ticket/:id" element={<TicketDetail />} />
             <Route path="/create-user" element={<CreateUser />} />
+            <Route path="/users" element={<UsersList />} />
+            <Route path="/users/edit/:id" element={<EditUser />} />
           </Routes>
         </ServerConnectionCheck>
       </div>

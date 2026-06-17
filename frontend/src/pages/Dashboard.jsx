@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Clock, AlertTriangle, CheckCircle, Ticket } from 'lucide-react';
+import { Plus, Clock, AlertTriangle, CheckCircle, Ticket, Users } from 'lucide-react';
 import api from '../api/api';
 
 const Dashboard = () => {
@@ -69,14 +69,19 @@ const Dashboard = () => {
         <div className="container animate-fade-in">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h2>Dashboard</h2>
-                <div>
+                <div style={{ display: 'flex', gap: '1rem' }}>
                     {user?.role === 'user' && (
                         <button className="btn btn-primary" onClick={() => setShowCreate(!showCreate)}>
                             <Plus size={18} /> New Ticket
                         </button>
                     )}
+                    {user?.role === 'superadmin' && (
+                        <Link to="/users" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Users size={18} /> View Users
+                        </Link>
+                    )}
                     {(user?.role === 'superadmin' || user?.role === 'admin') && (
-                        <Link to="/create-user" className="btn btn-primary">
+                        <Link to="/create-user" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Plus size={18} /> Create User
                         </Link>
                     )}
