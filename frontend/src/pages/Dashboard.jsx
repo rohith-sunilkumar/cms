@@ -75,7 +75,7 @@ const Dashboard = () => {
                             <Plus size={18} /> New Ticket
                         </button>
                     )}
-                    {user?.role === 'superadmin' && (
+                    {(user?.role === 'superadmin' || user?.role === 'admin') && (
                         <Link to="/users" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Users size={18} /> View Users
                         </Link>

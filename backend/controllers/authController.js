@@ -106,7 +106,11 @@ export const createUserPrivileged = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
-        const users = await User.find({}).select('-password');
+        let query = {};
+        if (req.user.role === 'admin') {
+            query = { role: 'user' };
+        }
+        const users = await User.find(query).select('-password');
         res.json(users);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -117,6 +121,9 @@ export const getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id).select('-password');
         if (user) {
+            if (req.user.role === 'admin' && user.role !== 'user') {
+                return res.status(403).json({ message: 'Admins can only view user roles' });
+            }
             res.json(user);
         } else {
             res.status(404).json({ message: 'User not found' });
@@ -144,6 +151,11 @@ export const updateUser = async (req, res) => {
         // Prevent editing superadmin if you are not superadmin, etc.
         if (req.user.role !== 'superadmin' && user.role === 'superadmin') {
              return res.status(403).json({ message: 'Cannot edit superadmin' });
+        }
+        
+        // Admin cannot edit another admin
+        if (req.user.role === 'admin' && user.role === 'admin') {
+             return res.status(403).json({ message: 'Admins cannot edit other admins' });
         }
 
         if (name) user.name = name;

@@ -13,7 +13,7 @@ const UsersList = () => {
     const currentUser = userStr ? JSON.parse(userStr) : null;
 
     useEffect(() => {
-        if (!currentUser || currentUser.role !== 'superadmin') {
+        if (!currentUser || (currentUser.role !== 'superadmin' && currentUser.role !== 'admin')) {
             navigate('/');
             return;
         }

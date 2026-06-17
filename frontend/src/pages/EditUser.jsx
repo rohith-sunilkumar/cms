@@ -20,7 +20,7 @@ const EditUser = () => {
     const currentUser = userStr ? JSON.parse(userStr) : null;
 
     useEffect(() => {
-        if (!currentUser || currentUser.role !== 'superadmin') {
+        if (!currentUser || (currentUser.role !== 'superadmin' && currentUser.role !== 'admin')) {
             navigate('/');
             return;
         }
@@ -128,7 +128,7 @@ const EditUser = () => {
                             style={{ width: '100%', padding: '0.75rem', borderRadius: '4px', border: '1px solid var(--border-color)' }}
                         >
                             <option value="user">User</option>
-                            <option value="admin">Admin</option>
+                            {currentUser?.role === 'superadmin' && <option value="admin">Admin</option>}
                             {formData.role === 'superadmin' && <option value="superadmin">Superadmin</option>}
                         </select>
                     </div>

@@ -7,8 +7,8 @@ const router = express.Router();
 router.post('/register', registerUser);
 router.post('/login', authUser);
 router.post('/create-user', protect, admin, createUserPrivileged);
-router.get('/users', protect, superadmin, getUsers);
-router.get('/users/:id', protect, superadmin, getUserById);
-router.put('/users/:id', protect, superadmin, updateUser);
+router.get('/users', protect, admin, getUsers);
+router.get('/users/:id', protect, admin, getUserById);
+router.put('/users/:id', protect, admin, updateUser);
 
 export default router;
